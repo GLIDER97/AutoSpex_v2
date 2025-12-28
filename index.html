@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoSpex - Vehicle Intelligence</title>
+    <meta name="description" content="Professional-grade diagnostic tools, VIN decoding, and financial analysis for vehicle owners." />
+    
+    <!-- External Integrations: Header (scripts-header.html) -->
+    <!--#include file="scripts-header.html" -->
+    <script id="scripts-header-injector">
+      // Client-side fallback if server-side inclusion is not used
+      fetch('scripts-header.html').then(r => r.text()).then(h => {
+        if(h.trim() && !h.includes('[HEADER SCRIPTS]')) {
+          const frag = document.createRange().createContextualFragment(h);
+          document.head.appendChild(frag);
+        }
+      }).catch(e => {});
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                dark: '#020617', // Deep Navy
+                primary: '#f59e0b', // Amber (Check Engine)
+                accent: '#3b82f6', // Blue
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['Fira Code', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      html { font-size: 16px; scroll-behavior: smooth; }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8fafc; 
+        color: #0f172a;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      html.dark body {
+        background-color: #020617;
+        color: #f8fafc;
+      }
+      .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: #e2e8f0; }
+      html.dark .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748b; }
+      
+      /* Smooth transitions for grid items */
+      .grid-item-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
+      /* Attention-grabbing CTA Glow */
+      @keyframes slow-glow {
+        0%, 100% { box-shadow: 0 0 10px rgba(245, 158, 11, 0.1); transform: scale(1); }
+        50% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.5); transform: scale(1.02); }
+      }
+      .animate-slow-glow {
+        animation: slow-glow 3s ease-in-out infinite;
+      }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://esm.sh/react@^19.2.3/",
+        "react": "https://esm.sh/react@^19.2.3",
+        "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+        "react-dom": "https://esm.sh/react-dom@^19.2.3",
+        "@google/genai": "https://esm.sh/@google/genai@^1.33.0"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <!-- External Integrations: Body Start (scripts-body-start.html) -->
+    <!--#include file="scripts-body-start.html" -->
+    <script id="scripts-body-start-injector">
+      fetch('scripts-body-start.html').then(r => r.text()).then(h => {
+        if(h.trim() && !h.includes('[BODY-START SCRIPTS]')) {
+          const frag = document.createRange().createContextualFragment(h);
+          document.body.insertBefore(frag, document.body.firstChild);
+        }
+      }).catch(e => {});
+    </script>
+
+    <div id="root"></div>
+
+    <!-- External Integrations: Footer (scripts-footer.html) -->
+    <!--#include file="scripts-footer.html" -->
+    <script id="scripts-footer-injector">
+      fetch('scripts-footer.html').then(r => r.text()).then(h => {
+        if(h.trim() && !h.includes('[FOOTER SCRIPTS]')) {
+          const frag = document.createRange().createContextualFragment(h);
+          document.body.appendChild(frag);
+        }
+      }).catch(e => {});
+    </script>
+  </body>
+</html>
