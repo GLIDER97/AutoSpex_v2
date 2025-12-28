@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { GoogleGenAI, Type } from "@google/genai";
 import CodeInput from './CodeInput';
@@ -429,9 +428,9 @@ const FaultCodeDecoder: React.FC = () => {
                 Decoder & Repair Guide
             </span>
             </h1>
-            <p className="text-slate-600 dark:text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+            <h2 className="text-slate-600 dark:text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
             Instantly translate check engine light codes into plain English. Get localized repair cost estimates, severity alerts, and DIY fixes for your vehicle.
-            </p>
+            </h2>
         </div>
         )}
 
@@ -452,7 +451,7 @@ const FaultCodeDecoder: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm font-medium">
                         <Lock className="w-4 h-4 text-slate-400" />
-                        100% Free & Private
+                        100% Free Search
                     </div>
                 </div>
 
@@ -528,7 +527,7 @@ const FaultCodeDecoder: React.FC = () => {
                 
                 <div className="mt-10 mb-10 flex items-center gap-2 text-slate-500 text-sm bg-white dark:bg-slate-900/50 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800">
                     <Lock className="w-3 h-3" />
-                    <span>100% Free & Private. We don't sell your data.</span>
+                    <span>Secure & Professional Service. Data shared only to fulfill quote requests.</span>
                 </div>
                 </>
             ) : (

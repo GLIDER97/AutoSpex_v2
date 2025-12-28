@@ -62,7 +62,8 @@ import {
   Download,
   Share2,
   Phone,
-  ShoppingCart
+  ShoppingCart,
+  Heart
 } from 'lucide-react';
 
 export { 
@@ -128,5 +129,6 @@ export {
   Download,
   Share2,
   Phone,
-  ShoppingCart
+  ShoppingCart,
+  Heart
 };

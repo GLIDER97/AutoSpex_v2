@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
     Gauge, 
@@ -333,19 +332,19 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                                 <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
                                     <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
                                 </div>
-                                <span className="text-slate-300 font-medium">We never sell your VIN or scan data.</span>
+                                <span className="text-slate-300 font-medium">Your search data is private. Partner sharing only occurs upon form submission.</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
                                     <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
                                 </div>
-                                <span className="text-slate-300 font-medium">No lead generation. No spam calls.</span>
+                                <span className="text-slate-300 font-medium">Qualified lead matching. Connect with verified service partners.</span>
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
                                     <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
                                 </div>
-                                <span className="text-slate-300 font-medium">100% Free - We are funded by transparency.</span>
+                                <span className="text-slate-300 font-medium">Professional service supported by lead-based revenue.</span>
                             </li>
                         </ul>
                     </div>
@@ -374,7 +373,7 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
              </div>
              <h2 className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white mb-6">Stop Overpaying Today.</h2>
              <p className="text-slate-600 dark:text-slate-400 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-                Whether it's a $1,000 repair quote or a cryptic error code, get the truth in seconds. No credit card required.
+                Whether it's a $1,000 repair quote or a cryptic error code, get the truth in seconds. Professional quote matching available.
              </p>
              <button 
                 onClick={() => onNavigate('fault-code-decoder')}

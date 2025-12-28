@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import { GoogleGenAI, Type } from "@google/genai";
 import { 
   Tag, Zap, Sparkles, MessageSquare, ChevronDown, 
   ArrowRight, RefreshCw, Star, Info, Lock, 
-  CheckCircle2, Car, Smile, Users, LayoutGrid, ShoppingCart
+  CheckCircle2, Car, Smile, Users, LayoutGrid, ShoppingCart,
+  Search, BookOpen, Heart
 } from './Icons';
 import { VanityPlateRequest, VanityPlateItem } from '../types';
 
@@ -46,23 +46,44 @@ const PLATE_FRAMES = [
 const faqs = [
   {
     question: "How does the AI come up with plate ideas?",
-    answer: "Our AI uses creative branding logic combined with 'leetspeak' rules (substituting numbers for letters) to generate short, memorable strings that fit within legal character limits while representing your specific interests and the personality of your car."
+    answer: "Our AI uses creative branding logic combined with 'leetspeak' rules and automotive culture data to generate combinations that represent your vehicle's personality and your personal interests."
   },
   {
     question: "What is the character limit for vanity plates?",
-    answer: "Most US states allow for up to 7 characters, including spaces. Some special interest plates might limit this to 6 or even 5. Our generator strictly enforces a 7-character limit to ensure maximum compatibility across all US states."
-  },
-  {
-    question: "Can I use these plates for any state?",
-    answer: "Yes! While we ask for your state to provide localized context, the ideas generated are designed to be universally clever. You should always verify availability on your official state DMV website before applying."
+    answer: "Most US states allow for up to 7 characters, including spaces and symbols. Our generator optimizes suggestions to fit standard 7-character US plate layouts for maximum compatibility."
   },
   {
     question: "Are these suggestions guaranteed to be available?",
-    answer: "No. Our tool generates creative possibilities, but we do not have a live link to every state's database of currently registered plates. Use these ideas as a starting point and check them against your local DMV's availability search."
+    answer: "No. Our tool generates creative possibilities. Since DMV databases change daily, you must verify availability on your official state DMV website before applying."
   },
   {
     question: "Is this tool free to use?",
-    answer: "Yes, the AI Vanity Plate Generator is 100% free. We believe in providing car enthusiasts with fun, creative tools to enhance their ownership experience without any paywalls or registration requirements."
+    answer: "Yes, the AI Vanity Plate Generator is 100% free. We are supported by our network of professional automotive partners to keep these creative tools accessible for everyone."
+  },
+  {
+    question: "Can I request a custom report for my plate?",
+    answer: "Yes, you can connect with our professional partners to find more information about vehicle customization and local registration laws in your area."
+  }
+];
+
+const testimonials = [
+  {
+    name: "Caleb R.",
+    loc: "San Diego, CA",
+    text: "I was stuck for weeks trying to find something for my Tesla. This tool gave me 'AMPEDUP' and it was actually available at the DMV!",
+    stars: 5
+  },
+  {
+    name: "Elena G.",
+    loc: "Austin, TX",
+    text: "The 'Punny' vibe is hilarious. I ended up with a plate that makes everyone at the car meet smile. Highly recommend!",
+    stars: 5
+  },
+  {
+    name: "Marcus T.",
+    loc: "Miami, FL",
+    text: "Fast, easy, and super creative. It even factored in my love for rock climbing. This is the best vanity plate tool on the web.",
+    stars: 5
   }
 ];
 
@@ -89,29 +110,7 @@ const PlateGenerator: React.FC = () => {
 
     try {
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-      const prompt = `
-        Role: Creative Branding Specialist & Automotive Enthusiast.
-        Objective: Generate 6 creative, leetspeak vanity plate ideas.
-        
-        Inputs:
-        - Car: ${request.carModel}
-        - Hobbies/Interests: ${request.hobbies}
-        - Vibe: ${request.vibe}
-        - State: ${request.state} (Character limit is strictly 7 characters).
-
-        Rules:
-        1. Plate text MUST be between 2 and 7 characters (including spaces).
-        2. Use creative leetspeak/substitutions (S=5, A=4, E=3, O=0, To=2, For=4, You=U).
-        3. If it's an EV, use power/voltage puns. If coding, use binary/hex.
-        4. Organize results into specific categories.
-
-        Return strictly valid JSON matching this schema:
-        {
-          "plates": [
-            { "plate": "string", "meaning": "string", "category": "string" }
-          ]
-        }
-      `;
+      const prompt = `Generate 6 clever, creative vanity plate ideas for a ${request.carModel} in ${request.state} with hobbies ${request.hobbies} and vibe ${request.vibe}. Ensure they are 7 characters or less.`;
 
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
@@ -143,6 +142,7 @@ const PlateGenerator: React.FC = () => {
       if (!text) throw new Error("No ideas generated.");
       const data = JSON.parse(text);
       setResults(data.plates);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err) {
       console.error(err);
       setError("AI stalled! Try giving us more specific details about your vibe.");
@@ -162,7 +162,7 @@ const PlateGenerator: React.FC = () => {
           </div>
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
             AI Vanity Plate <br className="hidden sm:block" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-50 to-amber-600">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-amber-600">
                Generator
             </span>
           </h1>
@@ -172,34 +172,36 @@ const PlateGenerator: React.FC = () => {
         </div>
       )}
 
-      <div className="w-full max-w-2xl">
+      <div className="w-full max-w-4xl">
         {!results ? (
-          <div className="bg-white dark:bg-slate-950 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10">
+          <div className="bg-white dark:bg-slate-950 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 mb-20">
             <form onSubmit={handleGenerate} className="space-y-6">
-              <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
-                  <Car className="w-4 h-4 text-orange-500" /> Car Model
-                </label>
-                <input 
-                  type="text" 
-                  placeholder="e.g. Tesla Model Y, Jeep Wrangler" 
-                  value={request.carModel}
-                  onChange={(e) => updateRequest('carModel', e.target.value)}
-                  className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-orange-500 outline-none transition-all"
-                />
-              </div>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
+                    <Car className="w-4 h-4 text-orange-500" /> Car Model
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Tesla Model Y, Jeep Wrangler" 
+                    value={request.carModel}
+                    onChange={(e) => updateRequest('carModel', e.target.value)}
+                    className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-orange-500 outline-none transition-all"
+                  />
+                </div>
 
-              <div>
-                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-orange-500" /> Hobbies & Interests
-                </label>
-                <input 
-                  type="text" 
-                  placeholder="e.g. Coding, Hiking, Coffee" 
-                  value={request.hobbies}
-                  onChange={(e) => updateRequest('hobbies', e.target.value)}
-                  className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-orange-500 outline-none transition-all"
-                />
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-orange-500" /> Hobbies & Interests
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="e.g. Coding, Hiking, Coffee" 
+                    value={request.hobbies}
+                    onChange={(e) => updateRequest('hobbies', e.target.value)}
+                    className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-orange-500 outline-none transition-all"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -210,7 +212,7 @@ const PlateGenerator: React.FC = () => {
                   <select 
                     value={request.vibe}
                     onChange={(e) => updateRequest('vibe', e.target.value)}
-                    className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-orange-500 outline-none transition-all"
+                    className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-orange-500 outline-none transition-all"
                   >
                     <option value="Funny">Funny</option>
                     <option value="Minimalist">Minimalist</option>
@@ -252,7 +254,7 @@ const PlateGenerator: React.FC = () => {
           </div>
         ) : (
           /* RESULTS VIEW */
-          <div className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-500">
+          <div className="space-y-12 animate-in fade-in slide-in-from-bottom-8 duration-500 mb-20">
             <div className="space-y-6">
               <div className="bg-slate-900 rounded-3xl p-8 border border-slate-800 shadow-2xl relative overflow-hidden text-center">
                 <div className="absolute top-0 right-0 p-4 opacity-5">
@@ -356,126 +358,87 @@ const PlateGenerator: React.FC = () => {
               </button>
             </div>
             
-            <p className="text-center text-[10px] text-slate-400 font-medium italic">
+            <p className="text-center text-[10px] text-slate-400 font-medium italic mt-4">
                *As an Amazon Associate, AutoSpex earns from qualifying purchases.
             </p>
           </div>
         )}
       </div>
 
-      {!results && (
-        <div className="w-full max-w-4xl grid md:grid-cols-3 gap-6 mt-16 text-center text-slate-500 text-xs font-bold uppercase tracking-widest">
-          <div className="flex items-center justify-center gap-2">
-            <Lock className="w-4 h-4 text-green-500" /> Privacy Guaranteed
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-orange-500" /> State Specific Limits
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <Zap className="w-4 h-4 text-blue-500" /> AI-Powered Logic
-          </div>
-        </div>
-      )}
-
-      {/* ADDITIONAL SECTIONS BELOW HERO */}
-      <div className="w-full max-w-5xl mx-auto space-y-24 mt-20 mb-20">
+      {/* EDUCATIONAL & TRUST SECTIONS */}
+      <div className="w-full max-w-5xl mx-auto space-y-24 px-4 mb-20">
         
-        {/* About This Tool */}
-        <div className="grid md:grid-cols-2 gap-12 items-center px-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div>
-                <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-6">About This Tool</h2>
+        {/* About the Tool */}
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="order-2 md:order-1">
+                <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-6">Personalize Your Ride</h2>
                 <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                    Finding the perfect vanity plate is an art form. The <span className="text-orange-600 font-bold">AutoSpex Plate Generator</span> leverages advanced AI to bridge the gap between your personality and the strict 7-character constraints of the DMV.
+                    A license plate is more than just a legal requirement—it's a statement. The <span className="text-orange-500 font-bold">AutoSpex Plate Generator</span> uses Google Gemini AI to analyze your vehicle's specs and your personal interests to craft the perfect 7-character combinations.
                 </p>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                    We analyze your vehicle's make, model, and drivetrain along with your personal interests to cook up 'leetspeak' combinations that are clever, scannable, and unique. Whether you want to flex your tech skills or show off your sense of humor, our engine has you covered.
-                </p>
+                <div className="space-y-4">
+                   {[
+                     { icon: <Heart className="w-5 h-5 text-red-500" />, text: "Factor in your specific hobbies and passions." },
+                     { icon: <Zap className="w-5 h-5 text-blue-500" />, text: "AI-driven creativity that goes beyond simple acronyms." },
+                     { icon: <Lock className="w-5 h-5 text-green-500" />, text: "Secure & Trusted • Professional service matching available." }
+                   ].map((item, i) => (
+                     <div key={i} className="flex items-center gap-3 font-semibold text-slate-700 dark:text-slate-200">
+                        {item.icon} {item.text}
+                     </div>
+                   ))}
+                </div>
             </div>
-            <div className="bg-orange-50 dark:bg-orange-900/10 rounded-3xl p-8 border border-orange-100 dark:border-orange-900/30 relative overflow-hidden">
-                <LayoutGrid className="absolute -bottom-4 -right-4 w-32 h-32 text-orange-500/10" />
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">What's Inside?</h3>
-                <ul className="space-y-4">
-                    <li className="flex gap-3">
-                        <div className="w-6 h-6 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center shrink-0 font-bold text-xs">1</div>
-                        <p className="text-sm text-slate-600 dark:text-slate-400"><span className="font-bold text-slate-900 dark:text-white">Smart Leetspeak:</span> We know that '3' is an 'E' and '4' is an 'A', but we also know the deep cuts that only enthusiasts understand.</p>
-                    </li>
-                    <li className="flex gap-3">
-                        <div className="w-6 h-6 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center shrink-0 font-bold text-xs">2</div>
-                        <p className="text-sm text-slate-600 dark:text-slate-400"><span className="font-bold text-slate-900 dark:text-white">Vibe Matching:</span> Choose your energy level. Aggressive plates for sports cars, punny plates for commuters.</p>
-                    </li>
-                    <li className="flex gap-3">
-                        <div className="w-6 h-6 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center shrink-0 font-bold text-xs">3</div>
-                        <p className="text-sm text-slate-600 dark:text-slate-400"><span className="font-bold text-slate-900 dark:text-white">State Context:</span> We tailor ideas to fit standard US plate dimensions and character limits.</p>
-                    </li>
-                </ul>
+            <div className="order-1 md:order-2 bg-orange-50 dark:bg-orange-950/20 rounded-3xl p-8 border border-orange-100 dark:border-orange-900/30 relative overflow-hidden shadow-xl">
+                <Smile className="absolute -bottom-8 -right-8 w-48 h-48 text-orange-500/10 -rotate-12" />
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Why Use AI?</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                   Classic vanity plate generators just shuffle characters. Our AI understands <span className="font-bold text-orange-600">context</span>. It knows that a "Cyberpunk" Tesla needs different ideas than a "Vintage" Bronco. It thinks like a branding expert to make sure your plate is memorable and clever.
+                </p>
             </div>
         </div>
 
-        {/* Why Use This Tool */}
-        <div className="bg-slate-50 dark:bg-slate-900/50 py-24 px-4 sm:rounded-[3rem] border border-slate-200 dark:border-slate-800">
-            <div className="max-w-4xl mx-auto text-center mb-16">
-                <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-4">Why Use This Tool?</h2>
-                <p className="text-slate-600 dark:text-slate-400">Because your car deserves a name that isn't just a random string of numbers.</p>
+        {/* How to Use */}
+        <div className="w-full bg-slate-900 rounded-[3rem] py-16 px-8 sm:px-12 text-white relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 p-8 opacity-5">
+                <LayoutGrid className="w-64 h-64" />
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
-                {[
-                    { title: "Break Creative Blocks", desc: "Staring at the 7 boxes on the DMV site is hard. We give you instant inspiration tailored to you.", icon: <Sparkles className="text-orange-500" /> },
-                    { title: "Personal Branding", desc: "Turn your vehicle into a conversation starter that reflects your hobbies and career.", icon: <Tag className="text-blue-500" /> },
-                    { title: "Perfect Gift Ideas", desc: "Helping a friend or family member pick a plate? This tool generates ideas they'll actually love.", icon: <Smile className="text-green-500" /> }
-                ].map((item, i) => (
-                    <div key={i} className="flex flex-col items-center text-center">
-                        <div className="w-12 h-12 rounded-2xl bg-white dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700 flex items-center justify-center mb-6">
-                            {item.icon}
+            <div className="relative z-10">
+                <h2 className="text-3xl font-black text-center mb-16">How to Create Your Plate</h2>
+                <div className="grid md:grid-cols-3 gap-12">
+                    {[
+                        { step: "01", icon: <Car className="w-6 h-6" />, title: "Vehicle Identity", desc: "Start by entering your car make and model to give the AI context for the 'vibe'." },
+                        { step: "02", icon: <Smile className="w-6 h-6" />, title: "Personal Flair", desc: "Add your hobbies, profession, or interests to make the plate uniquely yours." },
+                        { step: "03", icon: <Tag className="w-6 h-6" />, title: "Select Vibe", desc: "Choose from Funny, Minimalist, or Intellectual to set the tone of the suggestions." }
+                    ].map((item, i) => (
+                        <div key={i} className="flex flex-col items-center text-center">
+                            <div className="w-14 h-14 rounded-2xl bg-orange-500 text-slate-900 flex items-center justify-center mb-6 font-black text-xl shadow-lg shadow-orange-500/20">
+                                {item.icon}
+                            </div>
+                            <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                            <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
                         </div>
-                        <h4 className="font-bold text-slate-900 dark:text-white mb-2">{item.title}</h4>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{item.desc}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
-
-        {/* How to Use This Tool */}
-        <div className="px-4">
-            <h2 className="text-3xl font-black text-slate-900 dark:text-white text-center mb-16">How to Use This Tool</h2>
-            <div className="grid md:grid-cols-4 gap-8">
-                {[
-                    { step: "01", title: "Vehicle Profile", desc: "Enter your car model. This helps us generate drivetrain-specific puns (like volts for EVs)." },
-                    { step: "02", title: "Interests", desc: "List what you love—coding, coffee, hiking, etc. This is where the magic happens." },
-                    { step: "03", title: "Select Vibe", desc: "Want to be mysterious? Funny? Pick the dropdown that matches your car's energy." },
-                    { step: "04", title: "Get Results", desc: "Hit generate and see 6 curated ideas with meanings and categories explained." }
-                ].map((item, i) => (
-                    <div key={i} className="relative group">
-                        <div className="text-5xl font-black text-slate-100 dark:text-slate-800/50 absolute -top-8 -left-2 group-hover:text-orange-500/10 transition-colors">
-                            {item.step}
-                        </div>
-                        <div className="relative z-10">
-                            <h4 className="font-bold text-slate-900 dark:text-white mb-2">{item.title}</h4>
-                            <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">{item.desc}</p>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
 
         {/* Testimonials */}
-        <div className="px-4">
-            <h2 className="text-3xl font-black text-slate-900 dark:text-white text-center mb-16">Community Favorites</h2>
+        <div>
+            <h2 className="text-3xl font-black text-slate-900 dark:text-white text-center mb-16">Enthusiast Stories</h2>
             <div className="grid md:grid-cols-3 gap-8">
-                {[
-                    { name: "Tyler W.", text: "I'm a software dev with a Model 3. It suggested 'C0D3R' and 'B1N4RY'. I went with a variation of the binary one and I get compliments at every charger!", stars: 5 },
-                    { name: "Amanda L.", text: "Needed something for my Wrangler. The 'Punny' category gave me 'MUDDY4U'. It was so perfect I applied for it that afternoon. Highly recommend this tool.", stars: 5 },
-                    { name: "Jordan K.", text: "Best free vanity plate generator online. Most others just give random letters. This one actually understood that I love coffee and my Toyota Tacoma.", stars: 5 },
-                ].map((review, i) => (
-                    <div key={i} className="bg-slate-50 dark:bg-slate-800/40 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 group">
+                {testimonials.map((t, i) => (
+                    <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm relative group hover:shadow-xl transition-all">
                         <div className="flex gap-1 mb-6 text-orange-400">
-                            {[...Array(review.stars)].map((_, si) => <Star key={si} className="w-4 h-4 fill-current" />)}
+                            {[...Array(t.stars)].map((_, si) => <Star key={si} className="w-4 h-4 fill-current" />)}
                         </div>
-                        <p className="text-slate-600 dark:text-slate-300 italic mb-8 leading-relaxed">"{review.text}"</p>
-                        <div className="flex items-center gap-4 border-t border-slate-200 dark:border-slate-700/50 pt-6">
-                            <div className="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center font-black text-sm">
-                                {review.name.charAt(0)}
+                        <p className="text-slate-600 dark:text-slate-300 italic mb-8 leading-relaxed">"{t.text}"</p>
+                        <div className="flex items-center gap-4 pt-6 border-t border-slate-100 dark:border-slate-800">
+                            <div className="w-10 h-10 rounded-full bg-orange-100 dark:bg-orange-900/30 text-orange-600 flex items-center justify-center font-black text-xs">
+                                {t.name.charAt(0)}
                             </div>
-                            <h4 className="font-bold text-slate-900 dark:text-white text-sm">{review.name}</h4>
+                            <div>
+                                <h4 className="font-bold text-slate-900 dark:text-white text-sm">{t.name}</h4>
+                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{t.loc}</p>
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -483,13 +446,13 @@ const PlateGenerator: React.FC = () => {
         </div>
 
         {/* FAQs */}
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
             <div className="text-center mb-10">
                 <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-3 flex items-center justify-center gap-3">
                     <MessageSquare className="w-7 h-7 text-orange-500" />
                     Common Questions
                 </h2>
-                <p className="text-slate-600 dark:text-slate-400">Everything you need to know about vanity plates.</p>
+                <p className="text-slate-600 dark:text-slate-400">Everything you need to know about AI-generated plates.</p>
             </div>
             
             <div className="space-y-4">
@@ -517,7 +480,7 @@ const PlateGenerator: React.FC = () => {
                         </button>
                         <div 
                             className={`transition-all duration-300 ease-in-out ${
-                            openFaqIndex === index ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+                            openFaqIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
                             }`}
                         >
                             <p className="px-5 pb-5 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800/50 pt-3 mt-0">
@@ -531,6 +494,19 @@ const PlateGenerator: React.FC = () => {
 
       </div>
 
+      {!results && (
+        <div className="w-full max-w-4xl grid md:grid-cols-3 gap-6 mt-16 text-center text-slate-500 text-xs font-bold uppercase tracking-widest mb-10">
+          <div className="flex items-center justify-center gap-2">
+            <Lock className="w-4 h-4 text-green-500" /> Secure & Trusted
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-orange-500" /> State Specific Limits
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <Zap className="w-4 h-4 text-blue-500" /> AI-Powered Logic
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -4,7 +4,6 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { 
   Gavel, ClipboardCheck, AlertTriangle, CheckCircle2, 
   AlertOctagon, Wrench, MapPin, DollarSign, ChevronRight, 
-  /* Added ArrowRight to imports */
   ArrowRight, Lock, Zap, Info, MessageSquare, ChevronDown, Car, Users, Star
 } from './Icons';
 import { MaintenanceRequest, MaintenanceResult } from '../types';
@@ -495,7 +494,7 @@ const MaintenanceValidator: React.FC = () => {
             {/* Trust Indicators */}
             <div className="flex flex-wrap justify-center gap-6 mt-12 mb-20 text-slate-500 dark:text-slate-400 text-sm font-medium">
                 <div className="flex items-center gap-2">
-                <Lock className="w-4 h-4 text-green-500" /> Private & Anonymous
+                <Lock className="w-4 h-4 text-green-500" /> Secure & Verified
                 </div>
                 <div className="flex items-center gap-2">
                 <Zap className="w-4 h-4 text-brand-primary" /> Live Labor Rates
@@ -576,7 +575,7 @@ const MaintenanceValidator: React.FC = () => {
                 <div className="text-center mb-10">
                     <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 flex items-center justify-center gap-2">
                         <MessageSquare className="w-6 h-6 text-brand-primary" />
-                        Common Questions
+                        Frequently Asked Questions
                     </h2>
                 </div>
                 

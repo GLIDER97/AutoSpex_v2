@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ShieldCheck, FileText, Lock, MessageSquare, Send, Mail, MapPin, Target, Zap, Users, Award } from './Icons';
 
@@ -60,8 +59,8 @@ export const AboutUs: React.FC = () => (
             <div className="w-10 h-10 rounded-xl bg-green-50 dark:bg-green-900/20 text-green-500 flex items-center justify-center mb-2">
                <ShieldCheck className="w-6 h-6" />
             </div>
-            <h4 className="font-bold text-slate-900 dark:text-white">Unbiased Data</h4>
-            <p className="text-sm">We don't sell parts or perform repairs. Our only interest is providing you with the truth about your car.</p>
+            <h4 className="font-bold text-slate-900 dark:text-white">Expert Data</h4>
+            <p className="text-sm">We provide precision diagnostics. Information provided may be used to connect you with professional service partners.</p>
           </div>
           <div className="flex flex-col gap-2">
             <div className="w-10 h-10 rounded-xl bg-orange-50 dark:bg-orange-900/20 text-brand-primary flex items-center justify-center mb-2">
@@ -74,8 +73,8 @@ export const AboutUs: React.FC = () => (
             <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-500 flex items-center justify-center mb-2">
                <Users className="w-6 h-6" />
             </div>
-            <h4 className="font-bold text-slate-900 dark:text-white">Community Driven</h4>
-            <p className="text-sm">Our estimates are refined by real-world repair data shared by thousands of drivers like you.</p>
+            <h4 className="font-bold text-slate-900 dark:text-white">Service Matching</h4>
+            <p className="text-sm">Our platform connects you with verified industry experts to fulfill your repair and maintenance needs.</p>
           </div>
         </div>
       </div>
@@ -97,19 +96,19 @@ export const PrivacyPolicy: React.FC = () => (
   <LegalLayout title="Privacy Policy" icon={<ShieldCheck className="w-8 h-8" />}>
     <section>
       <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">1. Information We Collect</h2>
-      <p>At AutoSpex, we prioritize your privacy. When you use our tools, we collect technical vehicle information such as VIN numbers and OBD-II fault codes to provide diagnostic analysis. We do not store personal identifiers like your name or address unless explicitly provided via contact forms.</p>
+      <p>AutoSpex collects technical vehicle information (VIN, OBD-II codes) and contact information provided through our service forms. This includes name, phone number, and email address used for lead generation and professional matching.</p>
     </section>
     <section>
       <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">2. How We Use Data</h2>
-      <p>Your vehicle data is processed using advanced AI models (such as Google Gemini) to generate plain-English explanations and repair estimates. This data is used anonymously to improve our diagnostic accuracy and user experience.</p>
+      <p>We use your data to generate diagnostic reports and to connect you with our trusted network of automotive service partners. Lead generation is a core part of our platform, allowing users to receive competitive quotes and professional assistance.</p>
     </section>
     <section>
       <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">3. Data Sharing</h2>
-      <p>We do not sell your data to third parties, dealerships, or insurance companies. Information is shared only with our technical partners (like AI providers) for the sole purpose of delivering the service you requested.</p>
+      <p>We share the information you provide with our authorized automotive partners, including insurance carriers, mechanics, and dealerships, to fulfill the service requests you initiate. These partners may contact you directly with offers and quotes.</p>
     </section>
     <section>
       <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">4. Security</h2>
-      <p>We implement standard security measures to protect the information transmitted through our application. However, please be aware that no internet transmission is 100% secure.</p>
+      <p>We implement professional security measures to protect information transmitted through our application. User requests are handled securely and shared only with relevant service providers.</p>
     </section>
   </LegalLayout>
 );
@@ -125,12 +124,12 @@ export const TermsOfService: React.FC = () => (
       <p>By using this tool, you assume full responsibility for any actions taken based on the provided information. AutoSpex is not liable for any vehicle damage, personal injury, or financial loss resulting from the use of our services.</p>
     </section>
     <section>
-      <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">3. Accuracy of Estimates</h2>
-      <p>Repair costs, insurance estimates, and vehicle valuations are based on market averages and AI predictions. Actual costs will vary depending on your location, specific vehicle condition, and provider choice.</p>
+      <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">3. Lead Generation</h2>
+      <p>AutoSpex is a lead generation platform. By submitting your contact details, you consent to being contacted by our authorized service partners regarding repair quotes, insurance estimates, or vehicle purchase offers.</p>
     </section>
     <section>
-      <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">4. Service Access</h2>
-      <p>We reserve the right to modify or discontinue any part of the AutoSpex platform at any time without notice.</p>
+      <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3">4. Accuracy of Estimates</h2>
+      <p>Repair costs, insurance estimates, and vehicle valuations are based on market averages and AI predictions. Final costs and policies are determined solely by the independent service providers.</p>
     </section>
   </LegalLayout>
 );

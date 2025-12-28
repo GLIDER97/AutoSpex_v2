@@ -105,13 +105,8 @@ const VinLookup: React.FC = () => {
     };
 
     try {
-      // Simulate backend call to Node.js/Express route
-      // In a real environment, this would hit /api/vin-lead
       console.log("Submitting lead to VIN_lookup_leads.json:", submission);
-      
-      // Artificial delay for UX
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
       setLeadSubmitted(true);
     } catch (err) {
       console.error("Lead submission failed", err);
@@ -133,11 +128,11 @@ const VinLookup: React.FC = () => {
     },
     { 
       question: "What information does this decoder provide?", 
-      answer: "Our tool reveals detailed factory specifications including year, make, model, engine size, horsepower, manufacturing plant location, safety equipment, body style, and standard features." 
+      answer: "Our tool reveals detailed factory specifications and connects you with authorized service providers for comprehensive vehicle reports." 
     },
     { 
       question: "Is this VIN lookup really free?", 
-      answer: "Yes, 100%. We access public government databases (NHTSA) to provide you with accurate vehicle data at no cost. There are no hidden fees, subscriptions, or credit cards required." 
+      answer: "Yes, 100%. We access public government databases to provide you with accurate vehicle data at no cost. We are supported by our network of professional automotive partners." 
     },
     { 
       question: "Can I check motorcycle or truck VINs?", 
@@ -219,7 +214,7 @@ const VinLookup: React.FC = () => {
         )}
       </div>
 
-      {/* Trust Indicators Strip */}
+      {/* Trust Indicators Strip - Updated to accurately reflect service level */}
       {!result && (
         <div className="flex flex-wrap justify-center gap-4 sm:gap-8 mb-20 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-100">
            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm font-medium">
@@ -228,11 +223,11 @@ const VinLookup: React.FC = () => {
            </div>
            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm font-medium">
              <Lock className="w-4 h-4 text-slate-400" />
-             Secure & Private
+             Secure & Professional
            </div>
            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm font-medium">
              <CheckCircle2 className="w-4 h-4 text-blue-500" />
-             100% Free Report
+             Free Search
            </div>
         </div>
       )}
@@ -443,7 +438,6 @@ const VinLookup: React.FC = () => {
                   <div className="max-w-3xl mx-auto">
                     <div className="text-center mb-10">
                       <h3 className="text-2xl font-bold text-slate-400 dark:text-slate-500 mb-4 uppercase tracking-[0.2em]">Is this your next car?</h3>
-                      {/* HIGHLIGHTED & ENHANCED CTA TEXT */}
                       <div className="inline-block p-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl shadow-2xl shadow-blue-500/20">
                         <div className="bg-white dark:bg-slate-900 px-6 py-6 sm:px-10 sm:py-8 rounded-[0.9rem]">
                           <p className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white leading-tight">
@@ -560,7 +554,7 @@ const VinLookup: React.FC = () => {
                     </div>
                     <h2 className="text-4xl font-black text-slate-900 dark:text-white mb-4">Request Successful</h2>
                     <p className="text-slate-600 dark:text-slate-300 text-lg mb-0 max-w-md mx-auto">
-                      Your Insurance Rate for this model will be mailed to your inbox shortly.
+                      Your Insurance Rate for this model will be shared with our network to find you the best price.
                     </p>
                   </div>
                 )}
@@ -605,39 +599,9 @@ const VinLookup: React.FC = () => {
                 </div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">3. Get Report</h3>
                 <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                  View detailed specs, factory options, and engine data immediately for free.
+                  View detailed specs, factory options, and connect with partners for full reports.
                 </p>
               </div>
-            </div>
-          </div>
-
-          {/* Testimonials Section */}
-          <div className="w-full mb-20">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">
-              Trusted by Thousands
-            </h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { name: "Michael R.", role: "Car Buyer", text: "Used this on a dealership lot. Turns out the salesman was wrong about the horsepower. Saved me from buying the wrong trim!", stars: 5 },
-                { name: "Sarah L.", role: "DIY Mechanic", text: "Super fast and accurate. I needed to confirm the exact manufacturing plant for ordering parts. This tool gave me the info instantly.", stars: 5 },
-                { name: "David K.", role: "Fleet Manager", text: "I check VINs daily for my fleet. This interface is cleaner and faster than the paid tools we used to use. Highly recommended.", stars: 5 },
-              ].map((review, i) => (
-                <div key={i} className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-800">
-                  <div className="flex gap-1 mb-4 text-orange-400">
-                    {[...Array(review.stars)].map((_, si) => <Star key={si} className="w-4 h-4 fill-current" />)}
-                  </div>
-                  <p className="text-slate-700 dark:text-slate-300 mb-6 italic text-sm leading-relaxed">"{review.text}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400">
-                      {review.name.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">{review.name}</p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">{review.role}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
 
@@ -648,7 +612,7 @@ const VinLookup: React.FC = () => {
                 <MessageSquare className="w-6 h-6 text-brand-primary" />
                 Frequently Asked Questions
               </h2>
-              <p className="text-slate-600 dark:text-slate-400">Common questions about vehicle diagnostics and our tool.</p>
+              <p className="text-slate-600 dark:text-slate-400">Common questions about vehicle specs and our tool.</p>
             </div>
             
             <div className="space-y-4">

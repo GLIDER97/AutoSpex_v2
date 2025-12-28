@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { GoogleGenAI } from "@google/genai";
 import { 
@@ -122,7 +121,7 @@ const InsuranceEstimator: React.FC = () => {
       `;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3-flash-preview',
         contents: prompt,
       });
       setAiAnalysis(response.text);
@@ -138,7 +137,6 @@ const InsuranceEstimator: React.FC = () => {
     e.preventDefault();
     setLeadLoading(true);
 
-    // Ensure all user inputs and calculated results are included in the lead entry
     const leadEntry = {
       timestamp: new Date().toISOString(),
       contact: {
@@ -147,7 +145,7 @@ const InsuranceEstimator: React.FC = () => {
         email: contactInfo.email
       },
       userInputs: {
-        ...formData // Includes zipCode, year, make, model, usage, annualMileage, ageGroup, drivingHistory, creditTier, coverageLevel, deductible
+        ...formData
       },
       calculatedResults: {
         monthlyPremium: estimate?.monthlyPremium,
@@ -157,7 +155,6 @@ const InsuranceEstimator: React.FC = () => {
       }
     };
 
-    // Log the data targeted for Insurance_Estimator_leads.json
     console.log("Saving full lead data to Insurance_Estimator_leads.json:", leadEntry);
 
     setTimeout(() => {
@@ -168,8 +165,8 @@ const InsuranceEstimator: React.FC = () => {
 
   const insuranceFaqs = [
     {
-        question: "Why don't you ask for my phone number upfront?",
-        answer: "We believe in privacy first. Our calculator is 100% anonymous for getting an estimate. If you choose to connect with an agent later to lock in a price, you can provide your details then."
+        question: "How do I get an exact quote?",
+        answer: "Our calculator provides a highly accurate baseline estimate. To lock in a binding rate, we connect you with our network of real agents who can issue a policy based on your specific vehicle data."
     },
     {
         question: "How accurate is this estimate?",
@@ -177,7 +174,7 @@ const InsuranceEstimator: React.FC = () => {
     },
     {
         question: "Does checking this affect my credit score?",
-        answer: "No. This tool is a calculator, not a lender. We do not pull your credit report. We simply use the 'Credit Tier' you select to apply the appropriate risk multiplier to your estimate."
+        answer: "No. This tool is a calculator, not a lender. We do not perform credit checks. We simply use the 'Credit Tier' you select to apply the appropriate risk multiplier to your estimate."
     },
     {
         question: "Why is my estimate so high?",
@@ -188,8 +185,6 @@ const InsuranceEstimator: React.FC = () => {
         answer: "This tool provides a 'Fair Price' benchmark. You can use the 'Connect with Agents' button to send your details to real carriers who can offer a binding policy based on these inputs."
     }
   ];
-
-  // --- RENDER STEPS ---
 
   const renderStep1 = () => (
     <div className="space-y-6 animate-in slide-in-from-right fade-in duration-300">
@@ -387,7 +382,7 @@ const InsuranceEstimator: React.FC = () => {
              <div className="w-full max-w-md mx-auto h-3 bg-slate-800 rounded-full relative overflow-hidden mb-6">
                <div 
                  className={`absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ${
-                    estimate.score === 'great' ? 'bg-green-500 w-1/3' : estimate.score === 'average' ? 'bg-yellow-500 w-2/3' : 'bg-red-500 w-full'
+                    estimate.score === 'great' ? 'bg-green-50 w-1/3' : estimate.score === 'average' ? 'bg-yellow-50 w-2/3' : 'bg-red-500 w-full'
                  }`}
                ></div>
              </div>
@@ -458,7 +453,6 @@ const InsuranceEstimator: React.FC = () => {
            </div>
         </div>
 
-        {/* --- LEAD GENERATION SECTION --- */}
         <div className="mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-3xl p-8 border border-white/10 shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
@@ -493,7 +487,7 @@ const InsuranceEstimator: React.FC = () => {
                     <form onSubmit={handleLeadSubmit} className="space-y-6 max-w-xl mx-auto animate-in slide-in-from-bottom duration-300">
                        <div className="text-center mb-8">
                           <h3 className="text-2xl font-black text-white">Final Step: Contact Details</h3>
-                          <p className="text-indigo-100 text-sm">Submit your anonymous profile to real agents for a bindable quote.</p>
+                          <p className="text-indigo-100 text-sm">Submit your profile to our authorized carrier network for a bindable quote.</p>
                        </div>
                        
                        <div className="space-y-4">
@@ -563,7 +557,7 @@ const InsuranceEstimator: React.FC = () => {
                   </div>
                   
                   <p className="text-indigo-100 max-w-md mx-auto font-medium">
-                    Local agents are now preparing your personalized binder for {formData.make} {formData.model}.
+                    Our partner agents are now preparing your personalized binder for {formData.make} {formData.model}.
                   </p>
                 </div>
               )}
@@ -590,7 +584,7 @@ const InsuranceEstimator: React.FC = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
                 </span>
-                Anonymous • No Phone Number Required
+                Professional Matching • Verified Rates
             </div>
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
             Fair Price <br className="hidden sm:block" />
@@ -599,7 +593,7 @@ const InsuranceEstimator: React.FC = () => {
             </span>
             </h1>
             <p className="text-slate-600 dark:text-slate-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
-            Get an unbiased car insurance price range in seconds. We don't ask for your email, and we don't sell your data to agents unless you choose to connect.
+            Get an unbiased car insurance price range in seconds. Submit your information to receive competitive rates from our trusted network of insurance partners.
             </p>
         </div>
       )}
@@ -658,13 +652,13 @@ const InsuranceEstimator: React.FC = () => {
         <>
             <div className="flex flex-wrap justify-center gap-6 mt-12 mb-20 text-slate-500 dark:text-slate-400 text-sm font-medium">
                 <div className="flex items-center gap-2">
-                <Lock className="w-4 h-4 text-green-500" /> No Personal Data Stored
+                <Lock className="w-4 h-4 text-green-500" /> Secure Data Handling
                 </div>
                 <div className="flex items-center gap-2">
                 <Zap className="w-4 h-4 text-brand-primary" /> AI-Powered Accuracy
                 </div>
                 <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-indigo-500" /> 100% Free
+                <CheckCircle2 className="w-4 h-4 text-indigo-500" /> Free Professional Tool
                 </div>
             </div>
 
@@ -688,7 +682,7 @@ const InsuranceEstimator: React.FC = () => {
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">2. Select Profile</h3>
                     <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                    Choose your age bracket, driving history, and credit tier anonymously. No names required.
+                    Choose your age bracket, driving history, and credit tier. Information is used for accurate matching.
                     </p>
                 </div>
                 <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -697,7 +691,7 @@ const InsuranceEstimator: React.FC = () => {
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">3. See Fair Price</h3>
                     <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                    Instantly get a realistic monthly premium range and an AI explanation of the cost factors.
+                    Instantly get a realistic monthly premium range and connect with carriers for official binders.
                     </p>
                 </div>
                 </div>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { GoogleGenAI, Type } from "@google/genai";
@@ -197,7 +196,6 @@ const AffordabilityPredictor: React.FC = () => {
       source: 'Affordability_Predictor_PreApproval'
     };
 
-    // Store logic simulation for Car-affordability_leads.json
     console.log("Storing new lead in Car-affordability_leads.json:", leadEntry);
 
     setTimeout(() => {
@@ -570,7 +568,7 @@ const AffordabilityPredictor: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-3">
                        <CheckCircle2 className="w-5 h-5 text-green-500" />
-                       <span className="text-sm font-bold text-slate-300">No credit score impact for lookup</span>
+                       <span className="text-sm font-bold text-slate-300">Secure matching with authorized lenders</span>
                     </div>
                  </div>
               </div>
@@ -687,7 +685,7 @@ const AffordabilityPredictor: React.FC = () => {
         <>
             <div className="flex flex-wrap justify-center gap-6 mt-12 mb-20 text-slate-500 dark:text-slate-400 text-sm font-medium">
                 <div className="flex items-center gap-2">
-                <Lock className="w-4 h-4 text-green-500" /> Private & Secure
+                <Lock className="w-4 h-4 text-green-500" /> Secure Data Handling
                 </div>
                 <div className="flex items-center gap-2">
                 <Zap className="w-4 h-4 text-brand-primary" /> Real-Time Market Data
@@ -717,7 +715,7 @@ const AffordabilityPredictor: React.FC = () => {
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">2. Financial Check</h3>
                     <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                    Input your income and credit tier. We apply the 20/4/10 rule and other financial standards.
+                    Input your details to establish affordability benchmarks based on current US lending standards.
                     </p>
                 </div>
                 <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -726,7 +724,7 @@ const AffordabilityPredictor: React.FC = () => {
                     </div>
                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">3. Instant Verdict</h3>
                     <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                    See if it's a smart buy or a financial trap with our color-coded affordability score.
+                    See if it's a smart buy or a financial trap and connect with lenders for real-time rates.
                     </p>
                 </div>
                 </div>

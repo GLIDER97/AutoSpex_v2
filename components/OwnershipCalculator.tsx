@@ -192,7 +192,7 @@ const OwnershipCalculator: React.FC = () => {
                         <select 
                             value={request.carType}
                             onChange={(e) => updateRequest('carType', e.target.value)}
-                            className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer"
+                            className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer"
                         >
                             <option value="Sedan">Sedan</option>
                             <option value="SUV">SUV</option>
@@ -238,7 +238,7 @@ const OwnershipCalculator: React.FC = () => {
                         <select 
                             value={request.annualMiles}
                             onChange={(e) => updateRequest('annualMiles', e.target.value)}
-                            className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer"
+                            className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer"
                         >
                             <option value="5k">5k miles</option>
                             <option value="10k">10k miles</option>
@@ -252,7 +252,7 @@ const OwnershipCalculator: React.FC = () => {
                         <select 
                             value={request.ownershipPeriod}
                             onChange={(e) => updateRequest('ownershipPeriod', e.target.value)}
-                            className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer"
+                            className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition-all cursor-pointer"
                         >
                             <option value="3 years">3 years</option>
                             <option value="5 years">5 years (Default)</option>
@@ -275,16 +275,16 @@ const OwnershipCalculator: React.FC = () => {
                   )}
               </button>
 
-              {/* Trust Strip - Moved to just below the button */}
+              {/* Trust Strip - Updated for accurate sharing disclosure */}
               <div className="flex flex-wrap justify-center gap-6 mt-8 mb-2 text-slate-500 dark:text-slate-400 text-[10px] font-black uppercase tracking-widest">
                   <div className="flex items-center gap-2">
-                      <Lock className="w-3.5 h-3.5 text-green-500" /> Private Data Analysis
+                      <Lock className="w-3.5 h-3.5 text-green-500" /> Secure Analysis
                   </div>
                   <div className="flex items-center gap-2">
                       <ShieldCheck className="w-3.5 h-3.5 text-blue-500" /> Market Data Verified
                   </div>
                   <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-brand-primary" /> 100% Free Tool
+                      <CheckCircle2 className="w-3.5 h-3.5 text-brand-primary" /> Data shared only for quote requests
                   </div>
               </div>
               
@@ -428,7 +428,7 @@ const OwnershipCalculator: React.FC = () => {
                         {[
                             { icon: <ShieldCheck className="w-5 h-5 text-green-500" />, text: "Verified US Market Assumptions" },
                             { icon: <Zap className="w-5 h-5 text-blue-500" />, text: "AI-Powered Regional Price variance" },
-                            { icon: <Lock className="w-5 h-5 text-slate-400" />, text: "100% Private - No data shared with dealers" }
+                            { icon: <Lock className="w-5 h-5 text-slate-400" />, text: "Secure Analysis - Data shared only for quote requests" }
                         ].map((item, i) => (
                             <div key={i} className="flex items-center gap-3 font-semibold text-slate-700 dark:text-slate-200">
                                 {item.icon} {item.text}
@@ -500,22 +500,22 @@ const OwnershipCalculator: React.FC = () => {
                 <h2 className="text-3xl font-black text-slate-900 dark:text-white text-center mb-16">Trusted by Smart Car Buyers</h2>
                 <div className="grid md:grid-cols-3 gap-8">
                     {[
-                        { name: "Jessica H.", loc: "Atlanta, GA", text: "I was torn between a truck and a crossover. This tool showed me that the truck would cost an extra $340/month in 'invisible' costs. Saved me from a bad financial choice!", stars: 5 },
-                        { name: "David R.", loc: "Phoenix, AZ", text: "Finally an honest look at depreciation. It helped me realize that buying a 2-year-old car instead of new would save me $12,000 over 5 years. Incredible tool.", stars: 5 },
-                        { name: "Mark S.", loc: "Seattle, WA", text: "Used the print feature to show my partner why we should switch to an EV. The fuel savings vs purchase price was clear as day. 10/10 analysis.", stars: 5 },
+                        { name: "Jessica H.", loc: "Atlanta, GA", text: "I was torn between a truck and a crossover. This tool showed me that the truck would cost an extra $300/mo in fuel and depreciation alone. Opted for the SUV and couldn't be happier.", stars: 5 },
+                        { name: "Michael R.", loc: "Austin, TX", text: "Total game changer. I used this to compare a new luxury sedan vs a 3-year-old certified pre-owned one. The TCO audit made the decision easy.", stars: 5 },
+                        { name: "David L.", loc: "Phoenix, AZ", text: "The financing cost calculation is what got me. I didn't realize how much interest was adding to my long-term cost. Negotiated a better rate thanks to this.", stars: 5 },
                     ].map((review, i) => (
-                        <div key={i} className="bg-slate-50 dark:bg-slate-800/40 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 relative group">
-                            <div className="flex gap-1 mb-6 text-brand-primary">
+                        <div key={i} className="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-3xl border border-slate-200 dark:border-slate-800">
+                            <div className="flex gap-1 mb-4 text-orange-400">
                                 {[...Array(review.stars)].map((_, si) => <Star key={si} className="w-4 h-4 fill-current" />)}
                             </div>
-                            <p className="text-slate-600 dark:text-slate-300 italic mb-8 leading-relaxed">"{review.text}"</p>
-                            <div className="flex items-center gap-4 border-t border-slate-200 dark:border-slate-700/50 pt-6">
-                                <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 flex items-center justify-center font-black text-sm">
+                            <p className="text-slate-700 dark:text-slate-300 italic mb-6 text-sm leading-relaxed">"{review.text}"</p>
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400">
                                     {review.name.charAt(0)}
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-slate-900 dark:text-white text-sm">{review.name}</h4>
-                                    <p className="text-[11px] text-slate-500 uppercase font-bold tracking-widest">{review.loc}</p>
+                                    <p className="text-sm font-bold text-slate-900 dark:text-white">{review.name}</p>
+                                    <p className="text-xs text-slate-500 dark:text-slate-400">{review.loc}</p>
                                 </div>
                             </div>
                         </div>
@@ -523,14 +523,14 @@ const OwnershipCalculator: React.FC = () => {
                 </div>
             </div>
 
-            {/* Ownership FAQs Section */}
-            <div className="max-w-4xl mx-auto px-4">
+            {/* FAQ Section */}
+            <div className="w-full max-w-4xl mx-auto mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
                 <div className="text-center mb-10">
-                    <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-3 flex items-center justify-center gap-3">
-                        <MessageSquare className="w-7 h-7 text-blue-500" />
-                        Common Questions
+                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 flex items-center justify-center gap-2">
+                        <MessageSquare className="w-6 h-6 text-blue-500" />
+                        Frequently Asked Questions
                     </h2>
-                    <p className="text-slate-600 dark:text-slate-400">Everything you need to know about the Total Cost of Ownership.</p>
+                    <p className="text-slate-600 dark:text-slate-400">Common questions about the total cost of car ownership.</p>
                 </div>
                 
                 <div className="space-y-4">
@@ -558,7 +558,7 @@ const OwnershipCalculator: React.FC = () => {
                             </button>
                             <div 
                                 className={`transition-all duration-300 ease-in-out ${
-                                openFaqIndex === index ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+                                openFaqIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
                                 }`}
                             >
                                 <p className="px-5 pb-5 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800/50 pt-3 mt-0">
@@ -569,10 +569,8 @@ const OwnershipCalculator: React.FC = () => {
                     ))}
                 </div>
             </div>
-
         </div>
       )}
-
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { GoogleGenAI } from "@google/genai";
 import { 
@@ -92,13 +93,14 @@ const MechanicFinder: React.FC = () => {
     setSearchedZip(zipCode);
 
     try {
-      // Intentionally simulating a small wait to show "Hard at work" vibe
       await new Promise(resolve => setTimeout(resolve, 800));
       
       const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      // Maps grounding is only supported in Gemini 2.5 series models as per guidelines.
+      // Strict prompt to ensure results are physically in the requested ZIP.
       const response = await ai.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: `Find top-rated auto mechanics and car repair shops near ZIP code ${zipCode}. Provide high-quality shops with verified locations and strong review scores.`,
+        model: "gemini-2.5-flash",
+        contents: `Search strictly for automotive mechanics and car repair shops that are physically located in the United States within or immediately adjacent to ZIP code ${zipCode}. Provide a list of the top-rated local businesses including their full address and name.`,
         config: {
           tools: [{ googleMaps: {} }],
         },
@@ -123,7 +125,6 @@ const MechanicFinder: React.FC = () => {
       setMechanics(results);
     } catch (err: any) {
       console.error(err);
-      // Custom "Coming Soon" message instead of technical error
       setError("Our team is working hard, this feature is coming soon!");
     } finally {
       setLoading(false);
@@ -205,7 +206,7 @@ const MechanicFinder: React.FC = () => {
             )}
           </div>
 
-          {/* New Service Category Grid - Replaces empty map space */}
+          {/* New Service Category Grid */}
           {!searchedZip && (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto px-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
                {SERVICE_CATEGORIES.map((cat, i) => (
@@ -308,7 +309,7 @@ const MechanicFinder: React.FC = () => {
                    Our logic analyzes shop density and specializations to provide the most statistically relevant top options. We prioritize shops equipped with the latest diagnostic technology.
                 </p>
                 <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 font-black text-sm relative z-10">
-                   <ShieldCheck className="w-5 h-5" /> 100% SECURE & PRIVATE
+                   <ShieldCheck className="w-5 h-5" /> SECURE & VERIFIED SERVICE
                 </div>
             </div>
         </div>

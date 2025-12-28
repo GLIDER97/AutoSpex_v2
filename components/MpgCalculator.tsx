@@ -188,7 +188,7 @@ const MpgCalculator: React.FC<MpgCalculatorProps> = () => {
     },
     {
       question: "Is this tool free to use?",
-      answer: "Yes, our MPG and Fuel Cost Calculator is 100% free. We believe in helping drivers make informed financial decisions without paywalls."
+      answer: "Yes, our MPG and Fuel Cost Calculator is 100% free to use. We generate revenue by connecting users with authorized fuel rewards partners."
     }
   ];
 
@@ -338,7 +338,7 @@ const MpgCalculator: React.FC<MpgCalculatorProps> = () => {
                         type="number" 
                         value={tripDistance} 
                         onChange={(e) => setTripDistance(Number(e.target.value))}
-                        className="w-full p-4 pl-12 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-lg font-bold focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-4 pl-12 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 font-mono text-lg font-bold focus:ring-2 focus:ring-blue-500 outline-none"
                       />
                       <MapPin className="absolute left-4 top-4.5 w-5 h-5 text-slate-400" />
                       <span className="absolute right-4 top-4.5 text-sm text-slate-400 font-bold">MILES</span>
@@ -401,17 +401,17 @@ const MpgCalculator: React.FC<MpgCalculatorProps> = () => {
                    <input 
                      type="text" placeholder="Year" required
                      value={vehicleYear} onChange={e => setVehicleYear(e.target.value)}
-                     className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+                     className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
                    />
                    <input 
                      type="text" placeholder="Make" required
                      value={vehicleMake} onChange={e => setVehicleMake(e.target.value)}
-                     className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+                     className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
                    />
                    <input 
                      type="text" placeholder="Model" required
                      value={vehicleModel} onChange={e => setVehicleModel(e.target.value)}
-                     className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
+                     className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-indigo-500 outline-none"
                    />
                 </div>
                 
@@ -548,7 +548,6 @@ const MpgCalculator: React.FC<MpgCalculatorProps> = () => {
                       className="absolute top-0 bottom-0 left-0 bg-slate-300 dark:bg-slate-600 transition-all duration-1000"
                       style={{ width: '100%' }} // Background placeholder
                    ></div>
-                   {/* This is a simplified visual representation */}
                    <div 
                       className={`absolute top-0 bottom-0 left-0 ${getEfficiencyScore()?.bg} transition-all duration-1000`}
                       style={{ width: `${Math.min(100, (parseFloat(observedMpg) / (epaData.combined * 1.5)) * 100)}%` }}
@@ -639,9 +638,9 @@ const MpgCalculator: React.FC<MpgCalculatorProps> = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                {MPG_PRODUCTS.map((product, idx) => (
-                 <div key={idx} className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 p-8 flex flex-col hover:shadow-2xl transition-all group relative overflow-hidden">
-                    <div className="h-40 flex items-center justify-center mb-6 relative">
-                       <div className="absolute inset-0 bg-slate-50 dark:bg-slate-950 rounded-3xl -z-0 opacity-40 group-hover:opacity-60 transition-opacity" />
+                 <div key={idx} className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 p-6 flex flex-col hover:shadow-2xl transition-all group relative overflow-hidden">
+                    <div className="h-32 flex items-center justify-center mb-6 relative">
+                       <div className="absolute inset-0 bg-slate-50 dark:bg-slate-950 rounded-2xl -z-0 opacity-40 group-hover:opacity-60 transition-opacity" />
                        <img 
                          src={product.img} 
                          alt={product.name} 
@@ -649,14 +648,14 @@ const MpgCalculator: React.FC<MpgCalculatorProps> = () => {
                        />
                     </div>
                     <div className="flex-grow flex flex-col">
-                       <h3 className="font-bold text-slate-900 dark:text-white text-sm line-clamp-2 mb-6 leading-snug group-hover:text-emerald-500 transition-colors">
+                       <h3 className="font-bold text-slate-900 dark:text-white text-xs line-clamp-2 mb-6 leading-snug group-hover:text-emerald-500 transition-colors">
                          {product.name}
                        </h3>
                        <a 
                          href={product.url} 
                          target="_blank" 
                          rel="noopener noreferrer"
-                         className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-xs hover:opacity-90 transition-all mt-auto"
+                         className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-xs hover:opacity-90 transition-all mt-auto"
                        >
                          Buy on Amazon <ShoppingCart className="w-4 h-4" />
                        </a>
@@ -670,16 +669,16 @@ const MpgCalculator: React.FC<MpgCalculatorProps> = () => {
           </div>
       </div>
 
-      {/* Trust Indicators */}
+      {/* Trust Indicators - Updated to remove "Private" */}
       <div className="flex flex-wrap justify-center gap-6 mb-20 text-slate-500 dark:text-slate-400 text-sm font-medium">
          <div className="flex items-center gap-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-500" /> Verified EPA Data
          </div>
          <div className="flex items-center gap-2">
-            <Lock className="w-4 h-4 text-slate-400" /> No Personal Data Stored
+            <Lock className="w-4 h-4 text-slate-400" /> Secure Data Handling
          </div>
          <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-emerald-500" /> 100% Free & Private
+            <Zap className="w-4 h-4 text-emerald-500" /> Free Service • Partner Supported
          </div>
       </div>
 
@@ -704,7 +703,7 @@ const MpgCalculator: React.FC<MpgCalculatorProps> = () => {
                </div>
                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">2. Enter Details</h3>
                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
-                  Input basic details like your MPG, gas price, and distance. No signup required.
+                  Input basic details like your MPG, gas price, and distance.
                </p>
             </div>
             <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -716,36 +715,6 @@ const MpgCalculator: React.FC<MpgCalculatorProps> = () => {
                   Instantly reveal your cost per mile, monthly budget, or vehicle health status.
                </p>
             </div>
-         </div>
-      </div>
-
-      {/* Testimonials */}
-      <div className="w-full max-w-7xl px-4 mb-20">
-         <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">
-            Trusted by Smart Drivers
-         </h2>
-         <div className="grid md:grid-cols-3 gap-6">
-            {[
-               { name: "Jessica L.", loc: "Seattle, WA", text: "I didn't realize my 'cheap' commute was costing me $250 a month until I used this. It helped me decide to switch to a hybrid.", stars: 5 },
-               { name: "Mark D.", loc: "Austin, TX", text: "Used the Trip Planner for our family road trip to Grand Canyon. The fuel cost estimate was spot on within $10!", stars: 5 },
-               { name: "Ryan P.", loc: "Chicago, IL", text: "The Efficiency Audit showed my truck was getting 20% worse MPG than it should. Turned out to be a stuck brake caliper.", stars: 5 },
-            ].map((review, i) => (
-               <div key={i} className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-800">
-                  <div className="flex gap-1 mb-4 text-orange-400">
-                     {[...Array(review.stars)].map((_, si) => <Star key={si} className="w-4 h-4 fill-current" />)}
-                  </div>
-                  <p className="text-slate-700 dark:text-slate-300 mb-6 italic text-sm leading-relaxed">"{review.text}"</p>
-                  <div className="flex items-center gap-3">
-                     <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400">
-                        {review.name.charAt(0)}
-                     </div>
-                     <div>
-                        <p className="text-sm font-bold text-slate-900 dark:text-white">{review.name}</p>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">{review.loc}</p>
-                     </div>
-                  </div>
-               </div>
-            ))}
          </div>
       </div>
 
