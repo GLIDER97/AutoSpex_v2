@@ -6,7 +6,7 @@ import {
   Car, ShieldCheck, MapPin, TrendingDown, Clock, 
   History, MessageSquare, ChevronDown, CheckCircle2,
   Printer, RefreshCw, Star, Users, ArrowRight, TrendingUp,
-  Search, Wrench
+  Search, Wrench, Award, ShieldAlert, Globe, Target
 } from './Icons';
 import { OwnershipRequest, OwnershipResult } from '../types';
 import OwnershipInsuranceLeadForm from './OwnershipInsuranceLeadForm';
@@ -221,7 +221,7 @@ const OwnershipCalculator: React.FC = () => {
                             <input 
                                 type="text" placeholder="90210" value={request.zipCode} 
                                 onChange={(e) => updateRequest('zipCode', e.target.value)} 
-                                className="w-full p-3 pl-10 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                                className="w-full p-3 pl-10 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition-all"
                                 maxLength={5}
                             />
                         </div>
@@ -455,6 +455,45 @@ const OwnershipCalculator: React.FC = () => {
                             <p className="text-sm text-slate-600 dark:text-slate-400"><span className="font-bold text-slate-900 dark:text-white">Avoid 'Money Pits':</span> Identify vehicles with extreme depreciation or repair costs.</p>
                         </li>
                     </ul>
+                </div>
+            </div>
+
+            {/* Why Use This Tool Section */}
+            <div className="w-full px-4 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-75">
+                <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-12">
+                    Why Trust AutoSpex Financials?
+                </h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {[
+                        { 
+                            icon: <Lock className="w-8 h-8 text-green-500" />, 
+                            title: "Private Audit", 
+                            desc: "Analyze your potential purchase without giving dealers your contact info or credit access." 
+                        },
+                        { 
+                            icon: <Zap className="w-8 h-8 text-blue-500" />, 
+                            title: "Live Data Feed", 
+                            desc: "Our AI pulls real-time fuel and insurance market fluctuations from your specific ZIP code." 
+                        },
+                        { 
+                            icon: <Award className="w-8 h-8 text-amber-500" />, 
+                            title: "Unbiased Logic", 
+                            desc: "We don't work for dealerships. Our goal is to provide 100% transparent cost projections." 
+                        },
+                        { 
+                            icon: <Target className="w-8 h-8 text-purple-500" />, 
+                            title: "Precision Projections", 
+                            desc: "We use actuarial standards to predict depreciation curves over 3 and 5-year periods." 
+                        },
+                    ].map((item, i) => (
+                        <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all group">
+                            <div className="mb-6 flex justify-center group-hover:scale-110 transition-transform">
+                                {item.icon}
+                            </div>
+                            <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3">{item.title}</h3>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
 

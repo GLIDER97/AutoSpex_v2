@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { GoogleGenAI, Type } from "@google/genai";
@@ -5,7 +6,7 @@ import {
   TrendingUp, Car, DollarSign, PieChart, CheckCircle2, 
   AlertTriangle, MapPin, Calculator, ChevronRight, Lock, 
   Zap, Info, Target, Users, Star, MessageSquare, ChevronDown,
-  X, RefreshCw, ArrowRight, ShieldCheck, Mail, Phone, ShoppingCart
+  X, RefreshCw, ArrowRight, ShieldCheck, Mail, Phone, ShoppingCart, Globe, Award
 } from './Icons';
 import { AffordabilityData, PredictionResult } from '../types';
 
@@ -610,9 +611,12 @@ const AffordabilityPredictor: React.FC = () => {
 
       {!result && (
         <div className="text-center mb-10 max-w-3xl">
-          <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 text-sm font-semibold text-brand-primary mb-8 shadow-lg shadow-brand-primary/10 cursor-default">
-              <TrendingUp className="w-4 h-4" />
-              Real-Time Market Data
+          <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/50 text-sm font-semibold text-brand-primary mb-8 shadow-lg shadow-brand-primary/10 cursor-default text-center">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-primary"></span>
+            </span>
+            Real-Time Market Data Search
           </div>
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
             True Car Price <br className="hidden sm:block" />
@@ -682,7 +686,8 @@ const AffordabilityPredictor: React.FC = () => {
       </div>
 
       {!result && (
-        <>
+        <div className="w-full max-w-7xl px-4 flex flex-col items-center">
+            {/* Trust Indicators */}
             <div className="flex flex-wrap justify-center gap-6 mt-12 mb-20 text-slate-500 dark:text-slate-400 text-sm font-medium">
                 <div className="flex items-center gap-2">
                 <Lock className="w-4 h-4 text-green-500" /> Secure Data Handling
@@ -695,12 +700,75 @@ const AffordabilityPredictor: React.FC = () => {
                 </div>
             </div>
 
-            <div className="w-full max-w-7xl px-4 mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
+            {/* About the Price Predictor Section */}
+            <div className="grid md:grid-cols-2 gap-12 items-center mb-24 w-full animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
+                <div className="order-2 md:order-1">
+                    <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-6">About the Price Predictor</h2>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 text-lg">
+                        Buying a car is one of the largest financial decisions you'll make. Our predictor acts as your personal financial auditor, using <span className="font-bold text-brand-primary">Google's Technology</span> to establish a "True Market Value" for any vehicle in your specific neighborhood.
+                    </p>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                        We don't just look at national averages. We pull real-time data on supply, demand, and recent sales in your ZIP code to give you a negotiation target that dealers actually respect. We then overlay professional US lending standards to tell you exactly how that car fits into your monthly budget.
+                    </p>
+                </div>
+                <div className="order-1 md:order-2 bg-brand-primary/5 dark:bg-brand-primary/10 rounded-[3rem] p-10 sm:p-14 border border-brand-primary/10 dark:border-brand-primary/20 relative overflow-hidden shadow-2xl">
+                    <Globe className="absolute -bottom-8 -right-8 w-64 h-64 text-brand-primary/10 -rotate-12" />
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-4 relative z-10">Market Intelligence</h3>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed relative z-10 text-lg mb-8 font-medium">
+                       Access the same pricing data used by professional dealers. Our engine validates local market fluctuations to ensure you never overpay for a used or new vehicle.
+                    </p>
+                    <div className="flex items-center gap-3 text-brand-primary font-black text-sm relative z-10">
+                       <ShieldCheck className="w-6 h-6" /> VERIFIED MARKET DATA
+                    </div>
+                </div>
+            </div>
+
+            {/* Why Use This Tool Section */}
+            <div className="w-full mb-24 text-center">
+                <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-12">
+                    Why Drivers Trust AutoSpex Pricing
+                </h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {[
+                        { 
+                            icon: <Lock className="w-8 h-8 text-green-500" />, 
+                            title: "No Credit Check", 
+                            desc: "Check your buying power without a 'hard pull' affecting your official credit score." 
+                        },
+                        { 
+                            icon: <Zap className="w-8 h-8 text-blue-500" />, 
+                            title: "Instant Accuracy", 
+                            desc: "Our AI processes millions of sales records to provide a pinpoint fair market price." 
+                        },
+                        { 
+                            icon: <Award className="w-8 h-8 text-amber-500" />, 
+                            title: "Safety First", 
+                            desc: "We use conservative DTI ratios to ensure you don't become 'car-poor'." 
+                        },
+                        { 
+                            icon: <Target className="w-8 h-8 text-purple-500" />, 
+                            title: "Negotiation Power", 
+                            desc: "Walk into the dealership with the exact target price you should pay for that model." 
+                        },
+                    ].map((item, i) => (
+                        <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all group">
+                            <div className="mb-6 flex justify-center group-hover:scale-110 transition-transform">
+                                {item.icon}
+                            </div>
+                            <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3">{item.title}</h3>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* How It Works Section */}
+            <div className="w-full mb-24 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
                 <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">
-                How It Works
+                How to Audit Your Car Purchase
                 </h2>
                 <div className="grid md:grid-cols-3 gap-8">
-                <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm group hover:border-brand-primary/50 transition-colors">
                     <div className="w-14 h-14 rounded-2xl bg-orange-50 dark:bg-orange-900/20 text-brand-primary flex items-center justify-center mb-4">
                     <Car className="w-7 h-7" />
                     </div>
@@ -709,7 +777,7 @@ const AffordabilityPredictor: React.FC = () => {
                     Enter the car you want and your zip code to get real-time local market pricing data.
                     </p>
                 </div>
-                <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm group hover:border-brand-primary/50 transition-colors">
                     <div className="w-14 h-14 rounded-2xl bg-green-50 dark:bg-green-900/20 text-green-500 flex items-center justify-center mb-4">
                     <DollarSign className="w-7 h-7" />
                     </div>
@@ -718,7 +786,7 @@ const AffordabilityPredictor: React.FC = () => {
                     Input your details to establish affordability benchmarks based on current US lending standards.
                     </p>
                 </div>
-                <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <div className="flex flex-col items-center text-center p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm group hover:border-brand-primary/50 transition-colors">
                     <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-500 flex items-center justify-center mb-4">
                     <PieChart className="w-7 h-7" />
                     </div>
@@ -730,9 +798,10 @@ const AffordabilityPredictor: React.FC = () => {
                 </div>
             </div>
 
-            <div className="w-full max-w-7xl px-4 mb-20">
+            {/* Testimonials Section */}
+            <div className="w-full mb-24">
                 <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">
-                Trusted by Smart Buyers
+                Stories from Smart Buyers
                 </h2>
                 <div className="grid md:grid-cols-3 gap-6">
                 {[
@@ -740,13 +809,13 @@ const AffordabilityPredictor: React.FC = () => {
                     { name: "Mike T.", loc: "Denver, CO", text: "I almost bought a truck that would have eaten 25% of my monthly income. This tool saved me from a huge mistake.", stars: 5 },
                     { name: "David L.", loc: "Phoenix, AZ", text: "Simple, fast, and honest. The affordability breakdown showed me exactly what I could actually afford safely.", stars: 5 },
                 ].map((review, i) => (
-                    <div key={i} className="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-3xl border border-slate-200 dark:border-slate-800">
+                    <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[2rem] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all">
                     <div className="flex gap-1 mb-4 text-brand-primary">
                         {[...Array(review.stars)].map((_, si) => <Star key={si} className="w-4 h-4 fill-current" />)}
                     </div>
                     <p className="text-slate-700 dark:text-slate-300 mb-6 italic text-sm leading-relaxed">"{review.text}"</p>
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center font-bold text-slate-500 dark:text-slate-400">
+                        <div className="w-10 h-10 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center font-bold">
                         {review.name.charAt(0)}
                         </div>
                         <div>
@@ -759,6 +828,7 @@ const AffordabilityPredictor: React.FC = () => {
                 </div>
             </div>
 
+            {/* FAQ Section */}
             <div className="w-full max-w-4xl mx-auto mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
                 <div className="text-center mb-10">
                     <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3 flex items-center justify-center gap-2">
@@ -796,7 +866,7 @@ const AffordabilityPredictor: React.FC = () => {
                                 openFaqIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
                                 }`}
                             >
-                                <p className="px-5 pb-5 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800/50 pt-3 mt-0">
+                                <p className="px-5 pb-5 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-100 dark:border-slate-800/50 pt-3 mt-0 font-medium">
                                 {faq.answer}
                                 </p>
                             </div>
@@ -804,7 +874,7 @@ const AffordabilityPredictor: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </>
+        </div>
       )}
 
     </div>

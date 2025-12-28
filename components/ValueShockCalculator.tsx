@@ -3,7 +3,7 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { 
   TrendingDown, TrendingUp, Car, DollarSign, Clock, 
   Hourglass, AlertCircle, AlertOctagon, Info, ChevronRight, 
-  MessageSquare, ChevronDown, Lock, Zap, CheckCircle2, Star, ArrowRight, ShieldCheck
+  MessageSquare, ChevronDown, Lock, Zap, CheckCircle2, Star, ArrowRight, ShieldCheck, Globe, Award, ShieldAlert
 } from './Icons';
 import { ValueRequest, ValueResult } from '../types';
 import ResaleLeadForm from './ResaleLeadForm';
@@ -26,7 +26,7 @@ const ValueShockCalculator: React.FC = () => {
   const [isLeadFormOpen, setIsLeadFormOpen] = useState(false);
 
   const updateRequest = (field: keyof ValueRequest, value: string) => {
-    setRequest(prev => ({ ...prev, [field]: value }));
+    setRequest(prev => ({ ...prev, [field]: value as any }));
   };
 
   const handleCalculate = async () => {
@@ -426,7 +426,7 @@ const ValueShockCalculator: React.FC = () => {
 
       {/* Trust Elements (Shown when no result) */}
       {!result && (
-        <>
+        <div className="w-full max-w-7xl px-4 flex flex-col items-center">
             {/* Trust Indicators */}
             <div className="flex flex-wrap justify-center gap-6 mt-12 mb-20 text-slate-500 dark:text-slate-400 text-sm font-medium">
                 <div className="flex items-center gap-2">
@@ -440,8 +440,68 @@ const ValueShockCalculator: React.FC = () => {
                 </div>
             </div>
 
+            {/* About This Tool Section */}
+            <div className="grid md:grid-cols-2 gap-12 items-center mb-24 w-full animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
+                <div className="order-2 md:order-1">
+                    <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-6">About the Value Shock Predictor</h2>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 text-lg">
+                        The AutoSpex Resale Value Shock Calculator is a specialized financial engine built to protect car owners from the single largest cost of vehicle ownership: <span className="font-bold text-purple-600">Depreciation</span>. While gas and maintenance are visible, the thousands of dollars vanishing from your vehicle's value often go unnoticed until it's time to sell.
+                    </p>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                        Our system uses advanced AI to process real-time market volatility data across the United States. By analyzing supply/demand for your specific model and factoring in mileage milestones, we provide a transparent audit of your vehicle's wealth-erosion rate.
+                    </p>
+                </div>
+                <div className="order-1 md:order-2 bg-purple-50 dark:bg-purple-900/10 rounded-[3rem] p-10 sm:p-14 border border-purple-100 dark:border-purple-900/30 relative overflow-hidden shadow-2xl">
+                    <Globe className="absolute -bottom-8 -right-8 w-64 h-64 text-purple-500/10 -rotate-12" />
+                    <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-4 relative z-10">Market Intelligence</h3>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed relative z-10 text-lg mb-8 font-medium">
+                       Access the same pricing algorithms used by major US auction houses. Our engine validates daily loss rates to help you decide the absolute best time to trade-in or sell.
+                    </p>
+                    <div className="flex items-center gap-3 text-purple-600 dark:text-purple-400 font-black text-sm relative z-10">
+                       <ShieldCheck className="w-6 h-6" /> VERIFIED MARKET DATA
+                    </div>
+                </div>
+            </div>
+
+            {/* Why Use This Tool Section */}
+            <div className="w-full mb-24 text-center">
+                <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-12">
+                    Why Drivers Trust AutoSpex Valuation
+                </h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {[
+                        { 
+                            icon: <DollarSign className="w-8 h-8 text-green-500" />, 
+                            title: "Wealth Protection", 
+                            desc: "Identify exactly when your vehicle's depreciation curve steepens to avoid massive equity loss." 
+                        },
+                        { 
+                            icon: <Zap className="w-8 h-8 text-blue-500" />, 
+                            title: "AI Forecasting", 
+                            desc: "Our model predicts 12-month value drops with high accuracy based on current US economic trends." 
+                        },
+                        { 
+                            icon: <Award className="w-8 h-8 text-amber-500" />, 
+                            title: "Negotiation Power", 
+                            desc: "Walk into the dealership with certified data on your car's true private-party and trade-in value." 
+                        },
+                        { 
+                            icon: <ShieldAlert className="w-8 h-8 text-red-500" />, 
+                            title: "Audit Your Asset", 
+                            desc: "Stop viewing your car as a static expense and start managing it as a depreciating asset." 
+                        },
+                    ].map((item, i) => (
+                        <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all group">
+                            <div className="mb-6 flex justify-center group-hover:scale-110 transition-transform">{item.icon}</div>
+                            <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3">{item.title}</h3>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
             {/* How It Works */}
-            <div className="w-full max-w-7xl px-4 mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
+            <div className="w-full mb-24 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
                 <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">
                 How It Works
                 </h2>
@@ -551,7 +611,7 @@ const ValueShockCalculator: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </>
+        </div>
       )}
 
     </div>

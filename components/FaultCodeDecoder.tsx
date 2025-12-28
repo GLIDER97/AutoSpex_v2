@@ -6,7 +6,7 @@ import RecentScans from './RecentScans';
 import FAQSection from './FAQSection';
 import { 
   Users, CheckCircle2, DollarSign, Zap, ShieldCheck, Lock, 
-  Search, Wrench, Star, FileText 
+  Search, Wrench, Star, FileText, Info, AlertTriangle, ShieldAlert, Award, Bot
 } from './Icons';
 import { OBDCodeData, SeverityLevel, SearchHistoryItem, SafetyStatus, DIYDifficulty } from '../types';
 
@@ -457,8 +457,85 @@ const FaultCodeDecoder: React.FC = () => {
 
                 <RecentScans history={history} onSelect={(c) => handleSearch(c)} />
                 
+                {/* ABOUT THIS TOOL SECTION */}
+                <div className="w-full max-w-7xl px-4 mt-24 mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150">
+                    <div className="grid md:grid-cols-2 gap-12 items-center">
+                        <div className="order-2 md:order-1">
+                            <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-6">About the AutoSpex Decoder</h2>
+                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6 text-lg">
+                                The AutoSpex OBD-II Decoder is a specialized diagnostic engine built to help US car owners understand their vehicle's health without needing a mechanical engineering degree.
+                            </p>
+                            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-lg">
+                                We combine a massive database of standard SAE J2012 fault codes with <span className="font-bold text-brand-primary">Google Gemini AI</span> to provide context-aware results. Whether it's a generic P0420 or a specific manufacturer-derived error, our system analyzes the technical data to give you localized repair cost estimates and safety assessments based on current US market averages.
+                            </p>
+                        </div>
+                        <div className="order-1 md:order-2 bg-slate-900 rounded-[3rem] p-10 border border-slate-800 shadow-2xl relative overflow-hidden text-white">
+                            <Bot className="absolute -bottom-8 -right-8 w-64 h-64 text-brand-primary/10 -rotate-12" />
+                            <div className="relative z-10">
+                                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                                    <Zap className="w-6 h-6 text-brand-primary" />
+                                    Technical Architecture
+                                </h3>
+                                <ul className="space-y-4">
+                                    <li className="flex items-start gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0 mt-1" />
+                                        <p className="text-sm text-slate-300">Direct integration with US NHTSA & SAE technical datasets.</p>
+                                    </li>
+                                    <li className="flex items-start gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0 mt-1" />
+                                        <p className="text-sm text-slate-300">Live cost-auditing engine for local US mechanic labor rates.</p>
+                                    </li>
+                                    <li className="flex items-start gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-green-400 shrink-0 mt-1" />
+                                        <p className="text-sm text-slate-300">Privacy-first design (no personal data stored for simple searches).</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* WHY USE THIS TOOL SECTION */}
+                <div className="w-full max-w-7xl px-4 mb-20 text-center animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+                    <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white mb-12">
+                        Why Drivers Choose AutoSpex
+                    </h2>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {[
+                            { 
+                                icon: <DollarSign className="w-8 h-8 text-green-500" />, 
+                                title: "Save Hundreds", 
+                                desc: "Stop mechanics from upselling you on unnecessary repairs by knowing the exact issue first." 
+                            },
+                            { 
+                                icon: <ShieldAlert className="w-8 h-8 text-red-500" />, 
+                                title: "Safety Priority", 
+                                desc: "Instantly know if your car is safe for a road trip or if you need a tow truck immediately." 
+                            },
+                            { 
+                                icon: <Award className="w-8 h-8 text-amber-500" />, 
+                                title: "DIY Clarity", 
+                                desc: "We rank repairs by difficulty so you know if you can fix it at home or need a pro." 
+                            },
+                            { 
+                                icon: <Bot className="w-8 h-8 text-blue-500" />, 
+                                title: "AI Expert Access", 
+                                desc: "Get answers to follow-up questions from our AI Master Technician in real-time." 
+                            },
+                        ].map((benefit, i) => (
+                            <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all group">
+                                <div className="mb-6 flex justify-center group-hover:scale-110 transition-transform">
+                                    {benefit.icon}
+                                </div>
+                                <h3 className="text-xl font-black text-slate-900 dark:text-white mb-3">{benefit.title}</h3>
+                                <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">{benefit.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
                 {/* How to Use Section */}
-                <div className="w-full max-w-7xl px-4 mt-24 mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
+                <div className="w-full max-w-7xl px-4 mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-250">
                     <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">
                     How to Decode Your Check Engine Light
                     </h2>
@@ -500,7 +577,7 @@ const FaultCodeDecoder: React.FC = () => {
                     </h2>
                     <div className="grid md:grid-cols-3 gap-6">
                     {[
-                        { name: "James T.", loc: "Austin, TX", text: "Saved me $400 at the mechanic. I knew exactly what was wrong before I went in, so they couldn't upsell me.", stars: 5 },
+                        { name: "James T.", loc: "Austin, TX", text: "Saved me $400 at the mechanic. I knew exactly what was wrong before I went in, so they couldn't upsell me on unnecessary parts.", stars: 5 },
                         { name: "Sarah M.", loc: "Denver, CO", text: "The plain English explanation helped me understand that my 'major engine issue' was just a loose gas cap.", stars: 5 },
                         { name: "Robert K.", loc: "Detroit, MI", text: "Spot on repair estimates. Helps me budget for repairs on my older truck without getting ripped off.", stars: 5 },
                     ].map((review, i) => (
