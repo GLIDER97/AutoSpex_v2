@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { 
     Gauge, 
@@ -169,13 +170,13 @@ const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     onClick={() => onNavigate('ownership-calculator')}
                     className="px-8 py-4 rounded-2xl bg-brand-primary text-slate-900 font-bold text-lg hover:bg-orange-400 transition-all shadow-xl shadow-orange-500/20 flex items-center gap-2 hover:scale-105 active:scale-95"
                 >
-                    Cost of Ownership <ArrowRight className="w-5 h-5" />
+                    Car Ownership Calculator <ArrowRight className="w-5 h-5" />
                 </button>
                 <button 
                      onClick={() => onNavigate('wrap-designer')}
                     className="px-8 py-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all hover:scale-105 active:scale-95"
                 >
-                    Car Wrap Designer
+                    AI Car Wrap Designer
                 </button>
             </div>
 
